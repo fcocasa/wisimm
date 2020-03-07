@@ -1,0 +1,100 @@
+.boton {
+
+    float: none;
+    width: 30vh;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+.boton:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.content{
+    min-height: calc(100vh - 89px - 90px);
+}
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 5vh;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.topnav .search-container {
+    float: left;
+    margin:3vh;
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: groove;
+}
+
+.topnav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+    background: #ccc;
+}
+
+#consultarID{
+    float: none;
+    text-align: center;
+    padding: 6px 10px;
+    margin-top: 3px;
+    margin-right: 16px;
+    background: none;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+#nombreCliente{
+    margin-top: 10vh;
+    margin-left: 20%;
+    background-color: #F0FFFF;
+    height: 7vh;
+    width: 20vh;
+    line-height: 7vh;
+    border:double;
+}
+
+.card{
+    width: 50vw;
+}
