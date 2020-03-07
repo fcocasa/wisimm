@@ -49,5 +49,12 @@ class cliente extends controller {
             $this->view->render('cliente/perfil');
         }
     }
+    function nuevo(){
+        $nuevoCliente = isset($_POST['cliente[]']) ? $_POST['cliente[]']:null;
+        if($nuevoCliente === null){
+            //echo 'pagina nuevo cliente';
+            $this->view->render('cliente/nuevo');
+        }
+    }
 
 }

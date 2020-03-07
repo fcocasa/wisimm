@@ -16,7 +16,7 @@ class app {
         } else {
             $archivoController = $url['0'];
             //echo $archivoController;
-            if (file_exists('controllers/' . $archivoController . '.php')) {
+            if (file_exists('controllers/' . $archivoController . '.php')) { //dire controllers/fran.php
                 require_once 'controllers/' . $archivoController . '.php';
                 //echo 'controllers/'.$archivoController.'.php';
                 $controller = new $archivoController;
@@ -27,7 +27,7 @@ class app {
                     $controller -> {$url[1]}();
                 }
             } else {
-                echo '<br/><br/><br/> 404 Pagina no encontrada';
+                echo '404 Pagina no encontrada'.' no existe: ' . $archivoController . '.php';
             }
         }
     }

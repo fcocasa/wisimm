@@ -4,7 +4,7 @@ class controller{
     
     function __contruct(){
         //echo "controlador base";
-        $this->view = new View();
+        $this->view = new view();
     }
     function loadModel($model){
         $url = 'models/'.$model. '_model.php';

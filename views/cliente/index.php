@@ -14,7 +14,9 @@
                         <button type="submit">Buscar</button>
                     </form>
                 </div>
-                 <div class="boton" style="margin-top: 5vh;">Nuevo Cliente</div>
+                <form action="<?php constant('URL') ?>cliente/nuevo" method="post">
+                    <button type="submit" class="boton" style="margin-top: 5vh;">Nuevo Cliente</button>
+                </form>
             </div>
             <table id="customers">
                 <tr>

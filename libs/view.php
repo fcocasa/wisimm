@@ -11,7 +11,7 @@ class view {
         if (file_exists('views/' . $str . '.php')) {
             require_once 'views/' . $str . '.php';
         } else {
-            require_once '';
+            echo '404 Pagina no encontrada' .$str . '.php';
         }
     }
 

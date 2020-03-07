@@ -3,7 +3,7 @@
     float: none;
     width: 30vh;
     border: none;
-    background-color: #4CAF50;
+   background-color: #4CAF50;
     color: white;
     padding: 14px 28px;
     font-size: 16px;
@@ -11,6 +11,9 @@
     margin: auto;
     margin-top: 5vh;
     text-align: center;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(72,82,72,1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(72,82,72,1);
+    box-shadow: 10px 10px 5px 0px rgba(72,82,72,1);
 }
 
 .boton:hover {
