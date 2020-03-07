@@ -7,5 +7,9 @@ class main extends controller {
         $this->view->render('main/index');
         //echo 'main';
     }
+    
+    function render(){
+        $this->view->render('main/index');
+    }
 
 }

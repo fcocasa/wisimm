@@ -1,7 +1,7 @@
 <!--        inicio header-->
 <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/default.css" type="text/css">
 <div class="header">
-    <a href="#default" class="logo">Wisim</a>
+    <a href="<?php constant('URL')?>" class="logo">Wisim</a>
     <div class="header-right">
         <a href="<?php echo constant('URL')?>cliente">Clientes</a>
         <a href="#contact">Sensores</a>

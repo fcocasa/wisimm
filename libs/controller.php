@@ -10,7 +10,7 @@ class controller{
         $url = 'models/'.$model. '_model.php';
         
         if(file_exists($url)){
-            require $url;
+            require_once $url;
             
             $modelName= $model.'_model';
             $this->model = new $modelName(); //con esto estoy mandando a llamar al modelo

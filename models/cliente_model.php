@@ -44,7 +44,7 @@ class cliente_model extends model {
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
             //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $items = [];
-            while ($row = $result->fetchAll()) {
+            while ($row = $result->fetch()) {
                 $currentCliente = new objectCliente();
                 $currentCliente->nombre = $row['Nombre'];
                 //echo $row['Nombre'];
