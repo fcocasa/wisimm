@@ -12,6 +12,13 @@
                     <form action="<?php echo constant('URL') ?>cliente/consulta" method="post">
                         <input type="text" placeholder="Buscar por nombre o correo" name="nombre_cliente">
                         <button type="submit">Buscar</button>
+                        <br><br>
+                        <label for="buscar" style='font-style: italic'>Incluir no vigentes</label>
+                        <label class="myCheckbox">
+                            <input type="checkbox" name="buscar" value='todos' />
+                            <span></span>
+                        </label>
+<!--                        <input style='display: inline-block;margin-right:2vw'type='checkbox' name='buscar' value='todos'><h3 style='display: inline-block'>Incluir no vigentes</h3>-->
                     </form>
                 </div>
                 <form action="<?php constant('URL') ?>cliente/nuevo" method="post">
@@ -24,6 +31,7 @@
                     <th>Nombre</th>
                     <th>Telefono</th>
                     <th>Correo</th>
+                    <th>Vigente</th>
                     <th></th>
                 </tr>
                 <?php
@@ -35,6 +43,7 @@
                         <td><?php echo $cliente->nombre ?></td>
                         <td><?php echo $cliente->telefono ?></td>
                         <td><?php echo $cliente->correo ?></td>
+                        <td><?php echo $cliente->vigencia === 'true'? 'SI':'NO' ?></td>
                         <td><form action="<?php echo constant('URL') ?>cliente/perfil" method="post">
                                 <button id="consultarID" type="submit"> Consultar </button>
                                 <input type="hidden" name="id" value="<?php echo $cliente->id ?>"/>

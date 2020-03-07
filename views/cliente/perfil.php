@@ -2,36 +2,24 @@
 <html>
     <head>
         <title>Wisim Cliente</title>
-        <style>
-            .card {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                width: 50vw;
-                margin: auto;
-                margin-top: 10vh;
-                text-align: center;
-                font-family: arial;
-                height: 45vh;
-            }
-
-            .title {
-                color: grey;
-                font-size: 18px;
-                width: 40vw;
-            }
-        </style>
     </head>
     <body>
         <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/cliente.css" type="text/css">
         <?php require 'views/header.php'; ?>
         <div class="content" style="text-align: center;">
-            <form class="card" action="<?php echo constant('URL')?>cliente/modificar" method="post">
+            <form class="card" action="<?php echo constant('URL') ?>cliente/modificar" method="post">
                 <h2>Nombre</h2><input class="title" name="nombre" value="<?php echo $this->cliente->nombre ?>"/>
                 <h2>Telefono</h2><input class="title" name="telefono" value="<?php echo $this->cliente->telefono ?>"/>
                 <h2>Correo</h2><input class="title" name="correo" value="<?php echo $this->cliente->correo ?>"/>
                 <h2>Domicilio</h2><input class="title" name="domicilio" value="<?php echo $this->cliente->domicilio ?>"/>
                 <input type="hidden" name="id" value="<?php echo $this->cliente->id ?>"/>
-                <button class="boton" type="submit" >Modificar</button>
+                <button style='display:inline-block;margin-right:2vw;'class="boton" type="submit" name='tipo' value='modificar' >Modificar</button>
+                <button style="display:<?php echo $this->cliente->vigencia === 'true' ? 'inline-block':'none' ?>;" class="boton" type="submit"name='tipo' value='eliminar' >Eliminar</button>
+                <button style="display:<?php echo $this->cliente->vigencia === 'false' ? 'inline-block':'none' ?>" class="boton" type="submit"name='tipo' value='recuperar' >Recuperar</button>
             </form>
+            <?php if (!($this->message === null)) { ?>
+                <h3 style='font-style: italic; margin-top: 3vh'><?php echo $this->message ?></h3>
+            <?php } ?>
         </div>
         <?php require 'views/footer.php'; ?>
 

@@ -4,6 +4,7 @@ class view {
 
     function __construct() {
         //echo 'se creo view';
+        $this->message = null;
     }
 
     function render($str) {

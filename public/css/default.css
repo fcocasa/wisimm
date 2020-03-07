@@ -64,6 +64,6 @@ body {
     }
 }
 
-/*.content{
+.content{
     min-height: calc(100% - 88px - 90px);
-}*/
+}

@@ -3,7 +3,7 @@
     float: none;
     width: 30vh;
     border: none;
-   background-color: #4CAF50;
+    background-color: #4CAF50;
     color: white;
     padding: 14px 28px;
     font-size: 16px;
@@ -21,9 +21,9 @@
     color: black;
 }
 
-.content{
+/*.content{
     min-height: calc(100vh - 89px - 90px);
-}
+}*/
 
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -98,6 +98,36 @@
     border:double;
 }
 
-.card{
+
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     width: 50vw;
+    margin: auto;
+    margin-top: 10vh;
+    text-align: center;
+    font-family: arial;
+    height: 45vh;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+    width: 40vw;
+}
+
+.myCheckbox input {
+  position: relative;
+  z-index: -9999;
+}
+
+.myCheckbox span {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: url("link_to_image");
+}
+
+.myCheckbox input:checked + span {
+  background: url("link_to_another_image");
 }

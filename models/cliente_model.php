@@ -9,7 +9,12 @@ class cliente_model extends model {
 
     function getEveryClient() {
         try {
-            $sql = 'SELECT*FROM clientes';
+            if(isset($_POST['buscar'])){
+                $sql = "SELECT*FROM clientes";
+            } else {
+                $sql = "SELECT*FROM clientes WHERE vigencia like 'true' ";
+            }
+            
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
             //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
@@ -22,6 +27,7 @@ class cliente_model extends model {
                 $currentCliente->correo = $row['Correo'];
                 $currentCliente->telefono = $row['Telefono'];
                 $currentCliente->id = $row['ID_Cliente'];
+                $currentCliente->vigencia = $row['vigencia'];
                 array_push($items, $currentCliente);
             } return $items;
         } catch (PDOException $e) {
@@ -33,12 +39,12 @@ class cliente_model extends model {
 
     function getClient($cliente) {
         try {
-            $sql = "SELECT * FROM `clientes` WHERE Nombre LIKE '%" . $cliente . "%' OR Correo LIKE '%" . $cliente . "%'";
+            $sql = "SELECT * FROM `clientes` WHERE Nombre LIKE '%" . $cliente . "%' OR Correo LIKE '%" . $cliente . "%' and vigencia like 'true'";
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
             //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $items = [];
-            while ($row = $result->fetch()) {
+            while ($row = $result->fetchAll()) {
                 $currentCliente = new objectCliente();
                 $currentCliente->nombre = $row['Nombre'];
                 //echo $row['Nombre'];
@@ -46,6 +52,7 @@ class cliente_model extends model {
                 $currentCliente->correo = $row['Correo'];
                 $currentCliente->telefono = $row['Telefono'];
                 $currentCliente->id = $row['ID_Cliente'];
+                $currentCliente->vigencia = $row['vigencia'];
                 array_push($items, $currentCliente);
             } return $items;
         } catch (PDOException $e) {
@@ -70,6 +77,7 @@ class cliente_model extends model {
             $currentCliente->correo = $row['Correo'];
             $currentCliente->telefono = $row['Telefono'];
             $currentCliente->id = $row['ID_Cliente'];
+            $currentCliente->vigencia = $row['vigencia'];
             return $currentCliente;
         } catch (PDOException $e) {
             //echo $e->getMessage();
@@ -77,11 +85,46 @@ class cliente_model extends model {
             return [];
         }
     }
+
+    function modify($cliente) {
+        $sql = "UPDATE clientes SET Correo = '" . $cliente['correo'] . "', Telefono = '" . $cliente['telefono'] . "', Domicilio = '" . $cliente['domicilio'] . "', Nombre = '" . $cliente['nombre'] . "' WHERE ID_Cliente LIKE " . (int) $cliente['id'];
+        $this->db->connect()->query($sql);
+        return $this->getClientID($cliente['id']);
+    }
+
+    function new($cliente) {
+        try {
+            $sql = "INSERT INTO `clientes`(`Nombre`, `Telefono`, `Domicilio`, `Correo`, `vigencia`) VALUES ('" . $cliente['nombre'] . "','" . $cliente['telefono'] . "','" . $cliente['domicilio'] . "','" . $cliente['correo'] . "','true')";
+            //echo $sql;
+            $this->db->connect()->query($sql);
+            return true;
+        } catch (PDOException $e) {
+            //echo $e->getMessage();
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    function delete($clienteID) {
+        try {
+            $sql = "UPDATE clientes SET vigencia = 'false' WHERE ID_Cliente LIKE " . (int) $clienteID;
+            $this->db->connect()->query($sql);
+            return 'Cliente borrado con exito';
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
     
-    function modify($cliente){
-         $sql = "UPDATE clientes SET Correo = '".$cliente['correo']."', Telefono = '".$cliente['telefono']."', Domicilio = '".$cliente['domicilio']."', Nombre = '".$cliente['nombre']."' WHERE ID_Cliente LIKE ".(int)$cliente['id'];
-         $this->db->connect()->query($sql);
-         return $this->getClientID($cliente['id']);
-         }
+    function restore($clienteID){
+        try {
+            $sql = "UPDATE clientes SET vigencia = 'true' WHERE ID_Cliente LIKE " . (int) $clienteID;
+            $this->db->connect()->query($sql);
+            return $this->getClientID($clienteID);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return new objectCliente();
+        }
+    }
 
 }

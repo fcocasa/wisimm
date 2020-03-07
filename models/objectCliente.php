@@ -11,5 +11,6 @@ class objectCliente {
     public $domicilio;
     public $correo;
     public $id;
+    public $vigencia;
 
 }
