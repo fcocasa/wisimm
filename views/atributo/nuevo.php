@@ -9,7 +9,7 @@
 
         <?php require 'views/header.php'; ?>
         <div class="content" style="text-align: center;">
-            <form class="card" action="<?php constant('URL') ?>nuevo" method="post" >
+            <form class="card" action="<?php echo constant('URL') ?>atributo/nuevo" method="post" >
                 <h2>Atributo</h2><input type="text" class="title" name="nombre" required="true"/>
 
                 <br>

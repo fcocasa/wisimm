@@ -86,8 +86,8 @@ class atributo_model extends model {
 
     function new($atributo) {
         try {
-            echo $atributo['nombre'];
-            $sql = "INSERT INTO `atributos`(`Atributo`, `vigencia`) VALUES ('" . $atributo['nombre'] . "','true')";
+            echo $atributo;
+            $sql = "INSERT INTO `atributos`(`Atributo`, `vigencia`) VALUES ('" .$atributo. "','true')";
             //echo $sql;
             $this->db->connect()->query($sql);
             return true;

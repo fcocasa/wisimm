@@ -9,7 +9,7 @@
 
         <?php require 'views/header.php'; ?>
         <div class="content" style="text-align: center;">
-            <form class="card" action="<?php constant('URL') ?>nuevo" method="post" >
+            <form class="card" action="<?php  echo constant('URL') ?>cliente/nuevo" method="post" >
                 <h2>Nombre</h2><input type="text" class="title" name="nombre" required="true"/>
                 <h2>Telefono</h2><input type="text" class="title" name="telefono"/>
                 <h2>Correo</h2><input type="text" class="title" name="correo"/>

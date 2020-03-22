@@ -68,6 +68,7 @@ class atributo extends controller {
             $this->view->render('atributo/nuevo');
         } else {
             $atributo = $_POST['nombre'];
+            //echo $_POST['nombre'];
             $creado = $this->model->new($atributo);
             if ($creado) {
                 $this->view->message = 'Atributo "' . $_POST['nombre'] . '" creado con exito';
