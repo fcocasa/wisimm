@@ -63,7 +63,7 @@ class cliente extends controller {
     }
 
     function nuevo() {
-        if (!isset($_POST['nombre']) || !isset($_POST['nombre']) || !isset($_POST['nombre']) || !isset($_POST['nombre'])) {
+        if (!isset($_POST['nombre']) || !isset($_POST['telefono']) || !isset($_POST['correo']) || !isset($_POST['domicilio'])) {
             //echo 'pagina nuevo cliente';
             $this->view->render('cliente/nuevo');
         } else {

@@ -5,7 +5,8 @@ require_once 'libs/view.php';
 require_once 'libs/model.php';
 require_once 'config/config.php';
 require_once 'models/objectCliente.php';
-
+require_once 'models/objectAttribute.php';
+require_once 'models/objectSensor.php';
 
 $app = new app();
 ?>

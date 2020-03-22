@@ -4,8 +4,8 @@
     <a href="<?php constant('URL')?>" class="logo">Wisim</a>
     <div class="header-right">
         <a href="<?php echo constant('URL')?>cliente">Clientes</a>
-        <a href="#contact">Sensores</a>
-        <a href="#about">Atributos</a>
+        <a href="<?php echo constant('URL')?>sensor">Sensores</a>
+        <a href="<?php echo constant('URL')?>atributo">Atributos</a>
         <a href="#about">Ventas</a>
     </div>
 </div>
