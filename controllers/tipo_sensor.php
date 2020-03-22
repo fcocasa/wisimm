@@ -1,0 +1,82 @@
+<?php
+
+class tipo_sensor extends controller {
+
+    function __construct() {
+        parent::__contruct();
+        $this->view->datos = [];
+        //echo 'construyo tipoSensor';
+    }
+
+    function render() {
+        // echo 'redirect tipoSensor';
+        $this->view->datos = $this->model->getEveryTipo_Sensor();
+        //echo $this->dato
+        $this->view->render('tipo_sensor/index');
+    }
+
+    function consulta() {
+        $tipoSensor = isset($_POST['nombre_tipo_sensor']) ? $_POST['nombre_tipo_sensor'] : null;
+        if ($tipoSensor === null || $tipoSensor === '') {
+            $this->view->datos = $this->model->getEveryTipo_Sensor();
+            //echo $this->dato
+            $this->view->render('tipo_sensor/index');
+        } else {
+            $this->view->datos = $this->model->getTipo_Sensor($tipo_sensor);
+            //echo $this->dato
+            $this->view->render('tipo_sensor/index');
+        }
+    }
+
+    function perfil() {
+        $tipo_sensorID = isset($_POST['id']) ? $_POST['id'] : null;
+        if ($tipo_sensorID === null) {
+            echo 'algo salio mal';
+        } else {
+            $this->view->tipoSensor = $this->model->getTipo_SensorID($tipo_sensorID);
+            $this->view->render('tipo_sensor/perfil');
+        }
+    }
+
+    function modificar() {
+        $tipo_sensorID = isset($_POST['id']) ? $_POST['id'] : null;
+        // echo $_POST['tipo'];
+        if ($tipo_sensorID === null) {
+            $this->view->render('error');
+        } else {
+            if ($_POST['tipo'] === 'modificar') {
+                $tipo_sensor = array("id" => $_POST['id'], "nombre" => $_POST['nombre']);
+                //print_r($tipoSensor);
+                $this->view->tipoSensor = $this->model->modify($tipo_sensor);
+                $this->view->message = 'tipo_sensor modificado con exito';
+                $this->view->render('tipo_sensor/perfil');
+            } else if ($_POST['tipo'] === 'eliminar') {
+                $this->view->message = $this->model->delete($tipo_sensorID);
+                $this->view->tipoSensor = new objectTipo_Sensor();
+                $this->view->render('tipo_sensor/perfil');
+            } else {
+                $this->view->tipoSensor = $this->model->restore($tipo_sensorID);
+                $this->view->message = 'Tipo_Sensor recuperado con exito';
+                $this->view->render('tipo_sensor/perfil');
+            }
+        }
+    }
+
+    function nuevo() {
+        if (!isset($_POST['nombre'])) {
+            //echo 'pagina nuevo tipoSensor';
+            $this->view->render('tipo_sensor/nuevo');
+        } else {
+            $tipoSensor = $_POST['nombre'];
+            //echo $_POST['nombre'];
+            $creado = $this->model->new($tipo_sensor);
+            if ($creado) {
+                $this->view->message = 'Tipo_Sensor "' . $_POST['nombre'] . '" creado con exito';
+            } else {
+                $this->view->message = 'Tipo_Sensor no creado, ocurrio un error';
+            }
+            $this->view->render('tipo_sensor/nuevo');
+        }
+    }
+
+}

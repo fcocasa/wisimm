@@ -7,6 +7,6 @@ require_once 'config/config.php';
 require_once 'models/objectCliente.php';
 require_once 'models/objectAttribute.php';
 require_once 'models/objectSensor.php';
-
+require_once 'models/objectTipo_Sensor.php';
 $app = new app();
 ?>

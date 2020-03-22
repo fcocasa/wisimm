@@ -1,34 +1,32 @@
 <?php
 
-class cambiar_model extends model {
+class tipo_sensor_model extends model {
 
     function __construct() {
         parent::__contruct();
         //echo 'cree model';
     }
 
-    function getEverycambiar() {
+    function getEveryTipo_Sensor() {
         try {
-            if(isset($_POST['buscar'])){
-                $sql = "SELECT*FROM cambiar";
+            if (isset($_POST['buscar'])) {
+                $sql = "SELECT*FROM tipo_sensores";
             } else {
-                $sql = "SELECT*FROM cambiar WHERE vigencia like 'true' ";
+                $sql = "SELECT*FROM tipo_sensores WHERE vigencia like 'true' ";
             }
-            
+
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
-            //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
+            //$query->execute(['Atributo'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $items = [];
             while ($row = $result->fetch()) {
-                $currentcambiar = new objectcambiar();
-                $currentcambiar->nombre = $row['Nombre'];
+                $currentTipo_Sensor = new objectTipo_Sensor();
+                $currentTipo_Sensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
                 //echo $row['Nombre'];
-                $currentcambiar->domicilio = $row['Domicilio'];
-                $currentcambiar->correo = $row['Correo'];
-                $currentcambiar->telefono = $row['Telefono'];
-                $currentcambiar->id = $row['ID_cambiar'];
-                $currentcambiar->vigencia = $row['vigencia'];
-                array_push($items, $currentcambiar);
+                $currentTipo_Sensor->nombre = $row['Tipo_Sensor'];
+                $currentTipo_Sensor->version = $row['version'];
+                $currentTipo_Sensor->vigencia = $row['vigencia'];
+                array_push($items, $currentTipo_Sensor);
             } return $items;
         } catch (PDOException $e) {
             //echo $e->getMessage();
@@ -37,23 +35,21 @@ class cambiar_model extends model {
         }
     }
 
-    function getcambiar($cambiar) {
+    function getTipo_Sensor($tipo_sensor) {
         try {
-            $sql = "SELECT * FROM `cambiar` WHERE Nombre LIKE '%" . $cambiar . "%' OR Correo LIKE '%" . $cambiar . "%' and vigencia like 'true'";
+            $sql = "SELECT * FROM `tipo_sensores` WHERE Tipo_Sensor LIKE '%" . $tipo_sensor . "%' and vigencia like 'true'";
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
-            //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
+            //$query->execute(['Atributo'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $items = [];
             while ($row = $result->fetch()) {
-                $currentcambiar = new objectcambiar();
-                $currentcambiar->nombre = $row['Nombre'];
+                $currentTipo_Sensor = new objectTipo_Sensor();
+                $currentTipo_Sensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
                 //echo $row['Nombre'];
-                $currentcambiar->domicilio = $row['Domicilio'];
-                $currentcambiar->correo = $row['Correo'];
-                $currentcambiar->telefono = $row['Telefono'];
-                $currentcambiar->id = $row['ID_cambiar'];
-                $currentcambiar->vigencia = $row['vigencia'];
-                array_push($items, $currentcambiar);
+                $currentTipo_Sensor->nombre = $row['Tipo_Sensor'];
+                $currentTipo_Sensor->version = $row['version'];
+                $currentTipo_Sensor->vigencia = $row['vigencia'];
+                array_push($items, $currentTipo_Sensor);
             } return $items;
         } catch (PDOException $e) {
             //echo $e->getMessage();
@@ -62,23 +58,21 @@ class cambiar_model extends model {
         }
     }
 
-    function getcambiarID($cambiarID) {
+    function getTipo_SensorID($tipo_sensorID) {
         try {
-            $int = (int) $cambiarID;
-            $sql = "SELECT * FROM `cambiar` WHERE ID_cambiar LIKE " . $int . "";
+            $int = (int) $tipo_sensorID;
+            $sql = "SELECT * FROM `tipo_sensores` WHERE ID_Tipo_Sensor LIKE " . $int . "";
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
-            //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
+            //$query->execute(['Atributo'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $row = $result->fetch();
-            $currentcambiar = new objectcambiar();
-            $currentcambiar->nombre = $row['Nombre'];
-            //echo $row['Nombre'];
-            $currentcambiar->domicilio = $row['Domicilio'];
-            $currentcambiar->correo = $row['Correo'];
-            $currentcambiar->telefono = $row['Telefono'];
-            $currentcambiar->id = $row['ID_cambiar'];
-            $currentcambiar->vigencia = $row['vigencia'];
-            return $currentcambiar;
+            $currentTipo_Sensor = new objectTipo_Sensor();
+            $currentTipo_Sensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
+                //echo $row['Nombre'];
+                $currentTipo_Sensor->nombre = $row['Tipo_Sensor'];
+                $currentTipo_Sensor->version = $row['version'];
+                $currentTipo_Sensor->vigencia = $row['vigencia'];
+            return $currentTipo_Sensor;
         } catch (PDOException $e) {
             //echo $e->getMessage();
             echo $e->getMessage();
@@ -86,15 +80,17 @@ class cambiar_model extends model {
         }
     }
 
-    function modify($cambiar) {
-        $sql = "UPDATE cambiar SET Correo = '" . $cambiar['correo'] . "', Telefono = '" . $cambiar['telefono'] . "', Domicilio = '" . $cambiar['domicilio'] . "', Nombre = '" . $cambiar['nombre'] . "' WHERE ID_cambiar LIKE " . (int) $cambiar['id'];
+    function modify($tipo_sensor) {
+        
+        $sql = "UPDATE tipo_sensores SET Tipo_Sensor = '" . $tipo_sensor['nombre'] . "' WHERE ID_Tipo_Sensor LIKE " . (int) $tipo_sensor['id_tipo_sensor'];
         $this->db->connect()->query($sql);
-        return $this->getcambiarID($cambiar['id']);
+        return $this->getTipo_SensorID($tipo_sensor['id_tipo_sensor']);
     }
 
-    function new($cambiar) {
+    function new($tipo_sensor) {
         try {
-            $sql = "INSERT INTO `cambiar`(`Nombre`, `Telefono`) VALUES ('" . $cambiar['nombre'] . "','" . $cambiar['telefono'] . "')";
+            //echo $tipo_sensor;
+            $sql = "INSERT INTO `tipo_sensores`(`Atributo`, `vigencia`) VALUES ('" .$tipo_sensor. "','true')";
             //echo $sql;
             $this->db->connect()->query($sql);
             return true;
@@ -105,28 +101,26 @@ class cambiar_model extends model {
         }
     }
 
-    function delete($cambiarID) {
+    function delete($tipo_sensorID) {
         try {
-            $sql = "UPDATE cambiar SET vigencia = 'false' WHERE ID_cambiar LIKE " . (int) $cambiarID;
+            $sql = "UPDATE tipo_sensores SET vigencia = 'false' WHERE ID_Tipo_Sensor LIKE " . (int) $tipo_sensorID;
             $this->db->connect()->query($sql);
-            return 'cambiar borrado con exito';
+            return 'Tipo Sensor borrado con exito';
         } catch (PDOException $e) {
             echo $e->getMessage();
             return false;
         }
     }
-    
-    function restore($cambiarID){
+
+    function restore($tipo_sensorID) {
         try {
-            $sql = "UPDATE cambiar SET vigencia = 'true' WHERE ID_cambiar LIKE " . (int) $cambiarID;
+            $sql = "UPDATE tipo_sensores SET vigencia = 'true' WHERE ID_Tipo_Sensor LIKE " . (int) $tipo_sensorID;
             $this->db->connect()->query($sql);
-            return $this->getcambiarID($cambiarID);
+            return $this->getTipo_SensorID($tipo_sensorID);
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return new objectcambiar();
+            return new objectTipo_Sensor();
         }
     }
 
 }
-
-//la tabla quedaria mal escrita ya que esta en plural
