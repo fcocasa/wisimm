@@ -9,8 +9,8 @@
 
         <?php require 'views/header.php'; ?>
         <div class="content" style="text-align: center;">
-            <form class="card" action="<?php constant('URL') ?>nuevo" method="post" >
-                <h2>Atributo</h2><input type="text" class="title" name="id_tipo_sensor" required="true"/>
+            <form class="card" action="<?php echo constant('URL') ?>sensor/nuevo" method="post" >
+                <h2>Sensor</h2><input type="text" class="title" name="nuevo_sensor" required="true"/>
 
                 <br>
                 <button class="boton" type="submit" >Crear sensor</button>

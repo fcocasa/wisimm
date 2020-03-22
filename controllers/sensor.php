@@ -63,14 +63,16 @@ class sensor extends controller {
     }
 
     function nuevo() {
-        if (!isset($_POST['id_tipo_sensor'])) {
+        //echo $_POST['nuevo_sensor'];
+        if (!isset($_POST['nuevo_sensor'])) {
             //echo 'pagina nuevo sensor';
             $this->view->render('sensor/nuevo');
         } else {
-            $sensor = $_POST['id_tipo_sensor'];
+            $sensor = $_POST['nuevo_sensor'];
+            echo $sensor;
             $creado = $this->model->new($sensor);
             if ($creado) {
-                $this->view->message = 'ID_Tipo_Sensor "' . $_POST['id_tipo_sensor'] . '" creado con exito';
+                $this->view->message = 'Sensor "' . $_POST['nombre_sensor'] . '" creado con exito';
             } else {
                 $this->view->message = 'Sensor no creado, ocurrio un error';
             }

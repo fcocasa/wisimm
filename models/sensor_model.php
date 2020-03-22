@@ -85,7 +85,7 @@ class sensor_model extends model {
 
     function new($sensor) {
         try {
-            $sql = "INSERT INTO `sensores`(`ID_Tipo_Sensor`, `vigencia`) VALUES ('" . $sensor['id_tipo_sensor'] . "','true')";
+            $sql = "INSERT INTO `sensores`(`ID_Tipo_Sensor`, `vigencia`) VALUES ('" . (int)$sensor. "','true')";
             //echo $sql;
             $this->db->connect()->query($sql);
             return true;
