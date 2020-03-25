@@ -127,7 +127,7 @@ class atributo_model extends model {
         //print_r($idsAtt);
         while ($row = $idsAtt->fetch()) {
             $item = $this->getAttributeID($row['ID_Atributo']);
-            $item->valor = $row['valor'];
+            $item->valor = $row['Valor'];
             array_push($items,$item); 
         }
         //print_r($items);
