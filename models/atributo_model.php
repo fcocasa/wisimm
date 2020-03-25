@@ -78,7 +78,7 @@ class atributo_model extends model {
     }
 
     function modify($atributo) {
-        
+
         $sql = "UPDATE atributos SET Atributo = '" . $atributo['nombre'] . "' WHERE ID_Atributo LIKE " . (int) $atributo['id'];
         $this->db->connect()->query($sql);
         return $this->getAttributeID($atributo['id']);
@@ -87,7 +87,7 @@ class atributo_model extends model {
     function new($atributo) {
         try {
             //echo $atributo;
-            $sql = "INSERT INTO `atributos`(`Atributo`, `vigencia`) VALUES ('" .$atributo. "','true')";
+            $sql = "INSERT INTO `atributos`(`Atributo`, `vigencia`) VALUES ('" . $atributo . "','true')";
             //echo $sql;
             $this->db->connect()->query($sql);
             return true;
@@ -119,19 +119,26 @@ class atributo_model extends model {
             return new objectAttribute();
         }
     }
-    
-    function getAttFromTipoSensor($idTipoSensor){
-        $sql = "SELECT * FROM `valores` WHERE `ID_Tipo_Sensor` LIKE ".$idTipoSensor;
+
+    function getAttFromTipoSensor($idTipoSensor) {
+        $sql = "SELECT * FROM `valores` WHERE `ID_Tipo_Sensor` LIKE " . $idTipoSensor;
         $idsAtt = $this->db->connect()->query($sql);
         $items = [];
         //print_r($idsAtt);
         while ($row = $idsAtt->fetch()) {
             $item = $this->getAttributeID($row['ID_Atributo']);
             $item->valor = $row['Valor'];
-            array_push($items,$item); 
+            array_push($items, $item);
         }
         //print_r($items);
         return $items;
+    }
+
+    function modifyValueAttr($tipo_sensorID, $valoresID, $valores) {
+        foreach ($valoresID as $key => $value) {
+            $sql = "UPDATE valores SET Valor = '" . $valores[$key] . "' WHERE ID_Atributo LIKE " . $value . " and ID_Tipo_Sensor LIKE ". $tipo_sensorID ."";
+            $this->db->connect()->query($sql);
+        }
     }
 
 }
