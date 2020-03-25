@@ -48,8 +48,14 @@ class tipo_sensor extends controller {
         } else {
             if ($_POST['tipo'] === 'modificar') {
                 $tipo_sensor = array("id" => $_POST['id'],"version" => $_POST['version'], "nombre" => $_POST['nombre']);
+                $valores = $_POST["valores"];
+                $valoresID = $_POST["valoresID"];
+                //echo 'hola';
+                //print_r($valores);
                 //print_r($tipoSensor);
+                $this->model_atributo->modifyValueAttr($tipo_sensorID, $valoresID, $valores);
                 $this->view->tipoSensor = $this->model->modify($tipo_sensor);
+                $this->view->attributes = $this->model_atributo->getAttFromTipoSensor($tipo_sensorID);
                 $this->view->message = 'tipo_sensor modificado con exito';
                 $this->view->render('tipo_sensor/perfil');
             } else if ($_POST['tipo'] === 'eliminar') {

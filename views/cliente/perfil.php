@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/cliente.css" type="text/css">
         <?php require 'views/header.php'; ?>
         <div class="content" style="text-align: center;">
-            <form class="card" action="<?php echo constant('URL') ?>cliente/modificar" method="post">
+            <form class="card" action="<?php echo constant('URL') ?>tipo_sensor/modificar" method="post">
                 <h2>Nombre</h2><input class="title" name="nombre" value="<?php echo $this->cliente->nombre ?>"/>
                 <h2>Telefono</h2><input class="title" name="telefono" value="<?php echo $this->cliente->telefono ?>"/>
                 <h2>Correo</h2><input class="title" name="correo" value="<?php echo $this->cliente->correo ?>"/>

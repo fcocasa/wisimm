@@ -131,5 +131,6 @@ class tipo_sensor_model extends model {
             return new objectTipo_Sensor();
         }
     }
+    
 
 }

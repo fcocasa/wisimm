@@ -15,11 +15,14 @@
                 if (isset($this->attributes)) {
                     ?><br><h3>Atributos</h3><br><?php
                     foreach ($this->attributes as $value) {
-                        if($value->vigencia === 'true'){
-                        ?>
-                        <h2><?php echo $value->nombre ?></h2><input class="title" name="nombre" value="<?php echo $value->valor ?>"/>
-                        <?php }}
-                } ?>
+                        if ($value->vigencia === 'true') {
+                            ?>
+                            <input type='hidden' name="valoresID[]" value="<?php echo $value->id ?>"/>
+                            <h2><?php echo $value->nombre ?></h2><input class="title" name="valores[]" value="<?php echo $value->valor ?>"/>
+                        <?php }
+                    }
+                }
+                ?>
                 <button style='display:inline-block;margin-right:2vw;'class="boton" type="submit" name='tipo' value='modificar' >Modificar</button>
                 <button style="display:<?php echo $this->tipoSensor->vigencia === 'true' ? 'inline-block' : 'none' ?>;" class="boton" type="submit"name='tipo' value='eliminar' >Eliminar</button>
                 <button style="display:<?php echo $this->tipoSensor->vigencia === 'false' ? 'inline-block' : 'none' ?>" class="boton" type="submit"name='tipo' value='recuperar' >Recuperar</button>
