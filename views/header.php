@@ -5,6 +5,7 @@
     <div class="header-right">
         <a href="<?php echo constant('URL')?>cliente">Clientes</a>
         <a href="<?php echo constant('URL')?>sensor">Sensores</a>
+        <a href="<?php echo constant('URL')?>tipo_sensor">Tipo de Sensores</a>
         <a href="<?php echo constant('URL')?>atributo">Atributos</a>
         <a href="#about">Ventas</a>
     </div>

@@ -8,5 +8,6 @@ class objectAttribute{
     public $nombre;
     public $id;
     public $vigencia;
+    public $valor;
 
 }

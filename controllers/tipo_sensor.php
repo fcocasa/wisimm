@@ -5,6 +5,7 @@ class tipo_sensor extends controller {
     function __construct() {
         parent::__contruct();
         $this->view->datos = [];
+        $this->loadExternalModel('atributo');
         //echo 'construyo tipoSensor';
     }
 
@@ -33,6 +34,7 @@ class tipo_sensor extends controller {
         if ($tipo_sensorID === null) {
             echo 'algo salio mal';
         } else {
+            $this->view->attributes = $this->model_atributo->getAttFromTipoSensor($tipo_sensorID);
             $this->view->tipoSensor = $this->model->getTipo_SensorID($tipo_sensorID);
             $this->view->render('tipo_sensor/perfil');
         }
@@ -45,7 +47,7 @@ class tipo_sensor extends controller {
             $this->view->render('error');
         } else {
             if ($_POST['tipo'] === 'modificar') {
-                $tipo_sensor = array("id" => $_POST['id'], "nombre" => $_POST['nombre']);
+                $tipo_sensor = array("id" => $_POST['id'],"version" => $_POST['version'], "nombre" => $_POST['nombre']);
                 //print_r($tipoSensor);
                 $this->view->tipoSensor = $this->model->modify($tipo_sensor);
                 $this->view->message = 'tipo_sensor modificado con exito';
@@ -63,13 +65,18 @@ class tipo_sensor extends controller {
     }
 
     function nuevo() {
+        
+        $this->view->attributes = $this->model_atributo->getEveryAttribute();
+        //print_r($this->view->attributes);
         if (!isset($_POST['nombre'])) {
             //echo 'pagina nuevo tipoSensor';
             $this->view->render('tipo_sensor/nuevo');
         } else {
             $tipoSensor = $_POST['nombre'];
+            $version = $_POST['version'];
+            $attributes = $_POST['attribute'];
             //echo $_POST['nombre'];
-            $creado = $this->model->new($tipo_sensor);
+            $creado = $this->model->new($tipoSensor, $attributes, $version);
             if ($creado) {
                 $this->view->message = 'Tipo_Sensor "' . $_POST['nombre'] . '" creado con exito';
             } else {

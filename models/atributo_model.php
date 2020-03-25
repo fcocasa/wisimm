@@ -119,5 +119,19 @@ class atributo_model extends model {
             return new objectAttribute();
         }
     }
+    
+    function getAttFromTipoSensor($idTipoSensor){
+        $sql = "SELECT * FROM `valores` WHERE `ID_Tipo_Sensor` LIKE ".$idTipoSensor;
+        $idsAtt = $this->db->connect()->query($sql);
+        $items = [];
+        //print_r($idsAtt);
+        while ($row = $idsAtt->fetch()) {
+            $item = $this->getAttributeID($row['ID_Atributo']);
+            $item->valor = $row['valor'];
+            array_push($items,$item); 
+        }
+        //print_r($items);
+        return $items;
+    }
 
 }

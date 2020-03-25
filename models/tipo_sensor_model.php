@@ -8,7 +8,9 @@ class tipo_sensor_model extends model {
     }
 
     function getEveryTipo_Sensor() {
+        //echo 'llegue';
         try {
+            //echo 'llegue-------------------------------------';
             if (isset($_POST['buscar'])) {
                 $sql = "SELECT*FROM tipo_sensores";
             } else {
@@ -82,17 +84,24 @@ class tipo_sensor_model extends model {
 
     function modify($tipo_sensor) {
         
-        $sql = "UPDATE tipo_sensores SET Tipo_Sensor = '" . $tipo_sensor['nombre'] . "' WHERE ID_Tipo_Sensor LIKE " . (int) $tipo_sensor['id_tipo_sensor'];
+        $sql = "UPDATE tipo_sensores SET Tipo_Sensor = '" . $tipo_sensor['nombre'] . "', version = '" . $tipo_sensor['version'] . "' WHERE ID_Tipo_Sensor LIKE " . (int) $tipo_sensor['id'];
         $this->db->connect()->query($sql);
-        return $this->getTipo_SensorID($tipo_sensor['id_tipo_sensor']);
+        return $this->getTipo_SensorID($tipo_sensor['id']);
     }
 
-    function new($tipo_sensor) {
+    function new($tipo_sensor, $atributtes, $version) {
         try {
             //echo $tipo_sensor;
-            $sql = "INSERT INTO `tipo_sensores`(`Atributo`, `vigencia`) VALUES ('" .$tipo_sensor. "','true')";
-            //echo $sql;
+            $sql = "INSERT INTO `tipo_sensores`(`Tipo_Sensor`,`version`) VALUES ('" .$tipo_sensor. "','" .$version. "')";
+             //echo $sql;
             $this->db->connect()->query($sql);
+            $idTipoSensor =  $this->db->connect()->query("SELECT MAX(`ID_Tipo_Sensor`) FROM tipo_sensores")->fetch();
+           // print((int)$idTipoSensor);
+            foreach ($atributtes as $key => $value) {
+                 $sql = "INSERT INTO `valores`(`ID_Tipo_Sensor`,`ID_Atributo`) VALUES ('" .$idTipoSensor[0]. "','" .(int)$value. "')";
+                 $this->db->connect()->query($sql);
+            }
+           
             return true;
         } catch (PDOException $e) {
             //echo $e->getMessage();
