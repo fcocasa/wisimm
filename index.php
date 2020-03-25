@@ -8,5 +8,6 @@ require_once 'models/objectCliente.php';
 require_once 'models/objectAttribute.php';
 require_once 'models/objectSensor.php';
 require_once 'models/objectTipo_Sensor.php';
+require_once 'models/objectSensorLITE.php';
 $app = new app();
 ?>

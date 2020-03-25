@@ -27,8 +27,8 @@
             </div>
             <table id="customers">
                 <tr>
-                    <th>#</th>
-                    <th>ID_Tipo_Sensor</th>
+                    <th>ID Sensor</th>
+                    <th>Tipo Sensor</th>
                     <th>Vigente</th>
                     <th></th>
                 </tr>
@@ -37,7 +37,7 @@
                     ?>
                     <tr>
                         <td><?php echo $sensor->id_sensor ?></td>
-                        <td><?php echo $sensor->id_tipo_sensor ?></td>
+                        <td><?php echo $sensor->nombre_tipo_sensor ?></td>
                         <td><?php echo $sensor->vigencia === 'true'? 'SI':'NO' ?></td>
                         <td><form action="<?php echo constant('URL') ?>sensor/perfil" method="post">
                                 <button id="consultarID" type="submit"> Consultar </button>

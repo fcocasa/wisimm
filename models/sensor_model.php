@@ -20,7 +20,7 @@ class sensor_model extends model {
             //$query->execute(['Atributo'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $items = [];
             while ($row = $result->fetch()) {
-                $currentSensor = new objectSensor();
+                $currentSensor = new objectSensorLITE();
                 $currentSensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
                 //echo $row['Nombre'];
                 $currentSensor->id_sensor = $row['ID_Sensor'];
@@ -59,14 +59,15 @@ class sensor_model extends model {
     function getSensorID($sensorID) {
         try {
             $int = (int) $sensorID;
-            $sql = "SELECT * FROM `sensores` WHERE ID_Sensor LIKE " . $int . "";
+            $sql = "SELECT * FROM `sensores` WHERE ID_Sensor LIKE '" . $sensorID . "'";
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
             //$query->execute(['Atributo'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
             $row = $result->fetch();
+            print_r($row);
             $currentSensor = new objectSensor();
             $currentSensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
-            //echo $row['Nombre'];
+            //echo $row['ID_Tipo_Sensor'];
             $currentSensor->id_sensor = $row['ID_Sensor'];
             $currentSensor->vigencia = $row['vigencia'];
             return $currentSensor;

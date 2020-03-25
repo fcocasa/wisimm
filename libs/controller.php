@@ -28,6 +28,7 @@ class controller{
             $modelName= $model.'_model';
             $NombreModelo = 'model_'.$model;
             $this->$NombreModelo = new $modelName(); //con esto estoy mandando a llamar al modelo
+            //echo $NombreModelo;
         }
     }
 }

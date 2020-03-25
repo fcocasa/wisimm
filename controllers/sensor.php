@@ -6,11 +6,15 @@ class sensor extends controller {
         parent::__contruct();
         $this->view->datos = [];
         //echo 'construyo sensor';
+        $this->loadExternalModel('tipo_sensor');
     }
 
     function render() {
         // echo 'redirect sensor';
         $this->view->datos = $this->model->getEverySensor();
+        foreach ($this->view->datos as $key => $value) {
+            $value->nombre_tipo_sensor = $this->model_tipo_sensor->getTipo_SensorID($value->id_tipo_sensor)->nombre;
+        }
         //echo $this->dato
         $this->view->render('sensor/index');
     }
@@ -18,9 +22,7 @@ class sensor extends controller {
     function consulta() {
         $sensor = isset($_POST['nombre_sensor']) ? $_POST['nombre_sensor'] : null;
         if ($sensor === null || $sensor === '') {
-            $this->view->datos = $this->model->getEverySensor();
-            //echo $this->dato
-            $this->view->render('sensor/index');
+            $this->render();
         } else {
             $this->view->datos = $this->model->getSensor($sensor);
             //echo $this->dato
