@@ -11,6 +11,7 @@
         <div class="content" style="text-align: center;">
             <form class="card" action="<?php echo constant('URL') ?>sensor/nuevo" method="post" >
                 <h2>Sensor</h2><input type="text" class="title" name="nuevo_sensor" required="true"/>
+                <h2>Tipo Sensor</h2><input type="text" class="title" name="Tipo_Sensor" required="true"/><br>
 
                 <br>
                 <button class="boton" type="submit" >Crear sensor</button>

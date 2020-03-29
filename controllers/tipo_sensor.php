@@ -23,7 +23,7 @@ class tipo_sensor extends controller {
             //echo $this->dato
             $this->view->render('tipo_sensor/index');
         } else {
-            $this->view->datos = $this->model->getTipo_Sensor($tipo_sensor);
+            $this->view->datos = $this->model->getTipo_Sensor($tiposensor);
             //echo $this->dato
             $this->view->render('tipo_sensor/index');
         }
@@ -36,6 +36,7 @@ class tipo_sensor extends controller {
         } else {
             $this->view->attributes = $this->model_atributo->getAttFromTipoSensor($tipo_sensorID);
             $this->view->tipoSensor = $this->model->getTipo_SensorID($tipo_sensorID);
+          //  echo ('$tipo_sensorID');
             $this->view->render('tipo_sensor/perfil');
         }
     }

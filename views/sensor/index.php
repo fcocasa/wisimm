@@ -35,20 +35,34 @@
                 <?php
                 foreach ($this->datos as $sensor) {
                     ?>
-                    <tr>
+                   
+                      <tr>  
+                        <?php
+                foreach ($this->nombreTipoSensor as $nombre) {
+                    ?>
+                         
                         <td><?php echo $sensor->id_sensor ?></td>
-                        <td><?php echo $sensor->nombre_tipo_sensor ?></td>
+                        <td><?php echo $nombre->nombre_tipo_sensor ?></td>
+                        
+                      
                         <td><?php echo $sensor->vigencia === 'true'? 'SI':'NO' ?></td>
                         <td><form action="<?php echo constant('URL') ?>sensor/perfil" method="post">
                                 <button id="consultarID" type="submit"> Consultar </button>
                                 <input type="hidden" name="id_sensor" value="<?php echo $sensor->id_sensor ?>"/>
                             </form></td>
                     </tr>
+                       <?php
+                }
+                //}
+                ?>
                     <?php
                 }
                 //}
                 ?>
-            </table>
+                   
+                    
+                   
+             </table>
         </div>
         <?php require 'views/footer.php'; ?>
 

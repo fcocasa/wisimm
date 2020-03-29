@@ -70,7 +70,7 @@ class tipo_sensor_model extends model {
             $row = $result->fetch();
             $currentTipo_Sensor = new objectTipo_Sensor();
             $currentTipo_Sensor->id_tipo_sensor = $row['ID_Tipo_Sensor'];
-                //echo $row['Nombre'];
+               // echo $row['ID_Tipo_Sensor'];
                 $currentTipo_Sensor->nombre = $row['Tipo_Sensor'];
                 $currentTipo_Sensor->version = $row['version'];
                 $currentTipo_Sensor->vigencia = $row['vigencia'];
@@ -131,6 +131,22 @@ class tipo_sensor_model extends model {
             return new objectTipo_Sensor();
         }
     }
+    
+     function getNombreTipoSensorFromTipoSensor($idTipoSensor) {
+        $sql = "SELECT * FROM `tipo_sensores` WHERE `ID_Tipo_Sensor` LIKE " . $idTipoSensor;
+        $idSen = $this->db->connect()->query($sql);
+        $items = [];
+        print_r($idSen);
+        while ($row = $idSen->fetch()) {
+            $item = $this->getTipo_SensorID($row['ID_Tipo_Sensor']);
+            $item->valor = $row['Tipo_Sensor'];
+            array_push($items, $item);
+        }
+        //print_r($items);
+        return $items;
+     }
+     
+    
     
 
 }
