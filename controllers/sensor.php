@@ -43,8 +43,8 @@ class sensor extends controller {
         } else {
            //  print_r($idTipoSensor);
             $this->view->sensor = $this->model->getSensorID($sensorID);
-            $this->view->nombreTipoSensor = $this->model->getNombreSensorID($idTipoSensor);
-           print_r($this->view->nombreTipoSensor) ;
+            //$this->view->nombreTipoSensor = $this->model->getNombreSensorID($idTipoSensor);
+          // print_r($this->view->nombreTipoSensor) ;
             $this->view->render('sensor/perfil');
         }
     }
@@ -61,11 +61,11 @@ class sensor extends controller {
                 $this->view->sensor = $this->model->modify($sensor);
                // $this->view->nombreTipoSensor = $this->model_tipo_sensor->getNombreTipoSensorFromTipoSensor($sensorID);
                 $this->view->message = 'sensor modificado con exito';
-                $this->view->render('tipo_sensor/perfil');
+                $this->view->render('sensor/perfil');
             } else if ($_POST['tipo'] === 'eliminar') {
                 $this->view->message = $this->model->delete($sensorID);
                 $this->view->sensor = new objectSensorLITE();
-                $this->view->render('tipo_sensor/perfil');
+                $this->view->render('sensor/perfil');
             } else {
                 $this->view->sensor = $this->model->restore($sensorID);
                 $this->view->message = 'Sensor recuperado con exito';

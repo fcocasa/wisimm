@@ -6,6 +6,7 @@ class cliente extends controller {
         parent::__contruct();
         $this->view->datos = [];
         //echo 'construyo cliente';
+        $this->loadExternalModel('compra');
     }
 
     function render() {
@@ -34,6 +35,7 @@ class cliente extends controller {
             echo 'algo salio mal';
         } else {
             $this->view->cliente = $this->model->getClientID($clienteID);
+            $this->view->compras = $this->model_compra->getCompraFromCliente($clienteID);
             $this->view->render('cliente/perfil');
         }
     }
@@ -47,7 +49,11 @@ class cliente extends controller {
             if ($_POST['tipo'] === 'modificar') {
                 $cliente = array("id" => $_POST['id'], "nombre" => $_POST['nombre'], "telefono" => $_POST['telefono'], "correo" => $_POST['correo'], "domicilio" => $_POST['domicilio']);
                 //print_r($cliente);
+                //$valores = $_POST["valores"];
+               // $valoresID = $_POST["valoresID"];
+                 //$this->model_compra->modifyValueCompra($clienteID, $valoresID, $valores);
                 $this->view->cliente = $this->model->modify($cliente);
+                 $this->view->compras = $this->model_compra->getCompraFromCliente($clienteID);
                 $this->view->message = 'Cliente modificado con exito';
                 $this->view->render('cliente/perfil');
             } else if ($_POST['tipo'] === 'eliminar') {
@@ -63,6 +69,7 @@ class cliente extends controller {
     }
 
     function nuevo() {
+        $this->view->compras = $this->model_compra->getCompraFromCliente($clienteID);
         if (!isset($_POST['nombre']) || !isset($_POST['telefono']) || !isset($_POST['correo']) || !isset($_POST['domicilio'])) {
             //echo 'pagina nuevo cliente';
             $this->view->render('cliente/nuevo');

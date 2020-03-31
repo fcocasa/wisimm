@@ -7,7 +7,7 @@
         <a href="<?php echo constant('URL')?>sensor">Sensores</a>
         <a href="<?php echo constant('URL')?>tipo_sensor">Tipo de Sensores</a>
         <a href="<?php echo constant('URL')?>atributo">Atributos</a>
-        <a href="#about">Ventas</a>
+        <a href="<?php echo constant('URL')?>compra">Compras</a>
     </div>
 </div>
 <!--        fin header-->
