@@ -13,7 +13,7 @@ class sensor extends controller {
     function render() {
         // echo 'redirect sensor';
         $this->view->datos = $this->model->getEverySensor();
-        $this->view->nombreTipoSensor = $this->model->getEveryNombreSensor();
+        //$this->view->nombreTipoSensor = $this->model->getEveryNombreSensor();
       //  foreach ($this->view->datos as $key => $value) {
         //    $value->nombre_tipo_sensor = $this->model_tipo_sensor->getTipo_SensorID($value->id_tipo_sensor)->nombre;
         //}
@@ -24,7 +24,7 @@ class sensor extends controller {
         $sensor = isset($_POST['nombre_sensor']) ? $_POST['nombre_sensor'] : null;
         if ($sensor === null || $sensor === '') {
             $this->view->datos = $this->model->getEverySensor();
-            $this->view->nombreTipoSensor = $this->model->getEveryNombreSensor();
+          //  $this->view->nombreTipoSensor = $this->model->getEveryNombreSensor();
             $this->view->render('sensor/index');
             echo 'estoy aca';
         } else {

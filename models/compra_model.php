@@ -9,12 +9,12 @@ class compra_model extends model {
 
     function getEveryCompra() {
         try {
-            if(isset($_POST['buscar'])){
+            if (isset($_POST['buscar'])) {
                 $sql = "SELECT*FROM compras";
             } else {
                 $sql = "SELECT*FROM compras WHERE vigencia like 'true' ";
             }
-            
+
             $result = $this->db->connect()->query($sql);
             //$query = $this->db->connect()->query(); //no reconoce prepare esto       
             //$query->execute(['nombre'=> $datos['Nombre'], 'telefono'=> $datos['Telefono'], 'domicilio'=> $datos['Domicilio'],'correo'=> $datos['Correo']]);
@@ -22,6 +22,22 @@ class compra_model extends model {
             while ($row = $result->fetch()) {
                 $currentCompra = new objectCompra();
                 $currentCompra->id_cliente = $row['ID_Cliente'];
+
+                //----------------- conseguir nombre cliente
+                $sql2 = "SELECT*FROM clientes WHERE ID_Cliente LIKE " . $row['ID_Cliente'];
+                $row2 = $this->db->connect()->query($sql2)->fetch();
+                $currentCompra->nombre_cliente = $row2['Nombre'];
+                //------------------
+                //------------------conseguir id del tipo sensor
+                $sql3 = "SELECT*FROM sensores WHERE ID_Sensor LIKE " . $row['ID_Sensor'];
+                $row3 = $this->db->connect()->query($sql3)->fetch();
+                $id_tipo_sensor = $row3['ID_Tipo_Sensor'];
+                //------------------
+                //------------------consguir nombre tipo sensor
+                $sql4 = "SELECT*FROM tipo_sensores WHERE ID_Tipo_Sensor LIKE " . $id_tipo_sensor;
+                $row4 = $this->db->connect()->query($sql4)->fetch();
+                $currentCompra->nombre_tipo_sensor = $row4['Tipo_Sensor'];
+                //------------------
                 //echo $row['Nombre'];
                 $currentCompra->id_compra = $row['ID_Compra'];
                 $currentCompra->fecha = $row['Fecha'];
@@ -46,6 +62,22 @@ class compra_model extends model {
             while ($row = $result->fetch()) {
                 $currentCompra = new objectCompra();
                 $currentCompra->id_cliente = $row['ID_Cliente'];
+
+                //----------------- conseguir nombre cliente
+                $sql2 = "SELECT*FROM clientes WHERE ID_Cliente LIKE " . $row['ID_Cliente'];
+                $row2 = $this->db->connect()->query($sql2)->fetch();
+                $currentCompra->nombre_cliente = $row2['Nombre'];
+                //------------------
+                //------------------conseguir id del tipo sensor
+                $sql3 = "SELECT*FROM sensores WHERE ID_Sensor LIKE " . $row['ID_Sensor'];
+                $row3 = $this->db->connect()->query($sql3)->fetch();
+                $id_tipo_sensor = $row3['ID_Tipo_Sensor'];
+                //------------------
+                //------------------consguir nombre tipo sensor
+                $sql4 = "SELECT*FROM tipo_sensores WHERE ID_Tipo_Sensor LIKE " . $id_tipo_sensor;
+                $row4 = $this->db->connect()->query($sql4)->fetch();
+                $currentCompra->nombre_tipo_sensor = $row4['Tipo_Sensor'];
+                //------------------
                 //echo $row['Nombre'];
                 $currentCompra->id_compra = $row['ID_Compra'];
                 $currentCompra->fecha = $row['Fecha'];
@@ -70,11 +102,30 @@ class compra_model extends model {
             $row = $result->fetch();
             $currentCompra = new objectCompra();
             $currentCompra->id_cliente = $row['ID_Cliente'];
-                //echo $row['Nombre'];
-                $currentCompra->id_compra = $row['ID_Compra'];
-                $currentCompra->fecha = $row['Fecha'];
-                $currentCompra->id_sensor = $row['ID_Sensor'];
-                $currentCompra->vigencia = $row['vigencia'];
+            
+            //----------------- conseguir nombre cliente
+            $sql2 = "SELECT*FROM clientes WHERE ID_Cliente LIKE " . $row['ID_Cliente'];
+            $row2 = $this->db->connect()->query($sql2)->fetch();
+            $currentCompra->nombre_cliente = $row2['Nombre'];
+            //------------------
+            
+            //------------------conseguir id del tipo sensor
+            $sql3 = "SELECT*FROM sensores WHERE ID_Sensor LIKE " . $row['ID_Sensor'];
+            $row3 = $this->db->connect()->query($sql3)->fetch();
+            $id_tipo_sensor = $row3['ID_Tipo_Sensor'];
+            //------------------
+            
+            //------------------consguir nombre tipo sensor
+            $sql4 = "SELECT*FROM tipo_sensores WHERE ID_Tipo_Sensor LIKE " . $id_tipo_sensor;
+            $row4 = $this->db->connect()->query($sql4)->fetch();
+            $currentCompra->nombre_tipo_sensor = $row4['Tipo_Sensor'];
+            //------------------
+            
+            //echo $row['Nombre'];
+            $currentCompra->id_compra = $row['ID_Compra'];
+            $currentCompra->fecha = $row['Fecha'];
+            $currentCompra->id_sensor = $row['ID_Sensor'];
+            $currentCompra->vigencia = $row['vigencia'];
             return $currentCompra;
         } catch (PDOException $e) {
             //echo $e->getMessage();
@@ -112,8 +163,8 @@ class compra_model extends model {
             return false;
         }
     }
-    
-    function restore($compraID){
+
+    function restore($compraID) {
         try {
             $sql = "UPDATE compras SET vigencia = 'true' WHERE ID_Compra LIKE " . (int) $compraID;
             $this->db->connect()->query($sql);
@@ -123,8 +174,7 @@ class compra_model extends model {
             return new objectCompra();
         }
     }
-    
-    
+
     function getCompraFromCliente($idCliente) {
         $sql = "SELECT * FROM `compras` WHERE `ID_Cliente` LIKE " . $idCliente;
         $idsComp = $this->db->connect()->query($sql);
@@ -138,16 +188,12 @@ class compra_model extends model {
         //print_r($items);
         return $items;
     }
-    
-    
+
     function modifyValueCompra($clienteID, $valoresID, $valores) {
         foreach ($valoresID as $key => $value) {
-            $sql = "UPDATE compras SET ID_Sensor = '" . $valores[$key] . "' WHERE ID_Compra LIKE " . $value . " and ID_Cliente LIKE ". $clienteID ."";
+            $sql = "UPDATE compras SET ID_Sensor = '" . $valores[$key] . "' WHERE ID_Compra LIKE " . $value . " and ID_Cliente LIKE " . $clienteID . "";
             $this->db->connect()->query($sql);
         }
     }
-
-
-
 
 }

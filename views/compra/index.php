@@ -28,8 +28,9 @@
             <table id="customers">
                 <tr>
                     <th>#</th>
-                    <th>ID_Cliente</th>
-                    <th>ID_Sensor</th>
+                    <th>Cliente</th>
+                    <th>ID Sensor</th>
+                    <th>Tipo Sensor</th>
                     <th>Fecha</th>
                     <th>Vigente</th>
                     <th></th>
@@ -40,10 +41,11 @@
                     ?>
                     <tr>
                         <td><?php echo $compra->id_compra ?></td>
-                        <td><?php echo $compra->id_cliente ?></td>
+                        <td><?php echo $compra->nombre_cliente ?></td>
                         <td><?php echo $compra->id_sensor ?></td>
+                        <td><?php echo $compra->nombre_tipo_sensor ?></td>
                         <td><?php echo $compra->fecha ?></td>
-                        <td><?php echo $compra->vigencia === 'true'? 'SI':'NO' ?></td>
+                        <td><?php echo $compra->vigencia === 'true' ? 'SI' : 'NO' ?></td>
                         <td><form action="<?php echo constant('URL') ?>compra/perfil" method="post">
                                 <button id="consultarID" type="submit"> Consultar </button>
                                 <input type="hidden" name="id_compra" value="<?php echo $compra->id_compra ?>"/>

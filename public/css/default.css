@@ -67,3 +67,7 @@ body {
 .content{
     min-height: calc(100% - 88px - 90px);
 }
+
+.card{
+    overflow: auto; 
+}
